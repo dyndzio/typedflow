@@ -1,0 +1,17 @@
+@import "../../mixin";
+
+#search {
+  .content {
+    .input-container {
+      margin: 0 calc(var(--margin-base) * 3px) calc(var(--margin-base) * 3px);
+    }
+    .result-list {
+      display: flex;
+      justify-content: space-evenly;
+      padding: calc(var(--padding-base) * 2px) 0;
+      >div {
+        text-align: center;
+      }
+    }
+  }
+}

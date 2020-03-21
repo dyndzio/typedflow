@@ -1,0 +1,11 @@
+
+.nav {
+  &-up, &-down {
+    width: 30px;
+    height: 30px;
+    background: url('../../assets/icon/arrow.png')no-repeat center;
+  }
+  &-down {
+    transform: rotate(180deg);
+  }
+}

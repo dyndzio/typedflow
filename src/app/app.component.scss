@@ -1,0 +1,38 @@
+#typedflow {
+display:flex;
+flex-direction: column;
+height: 100vh;
+  justify-content: center;
+  .magic-container {
+    transform: translateY(0);
+    transition: all 1s;
+    h1 {
+      color: var(--plain-white);
+      text-align: center;
+
+      > span {
+        &.shine {
+          animation: color-me-in 0.1s infinite;
+          color: var(--detail-color);
+          font-weight: var(--font-weight-bold);
+        }
+      }
+    }
+    &.trigger-animation {
+      transform: translateY(50px);
+    }
+  }
+}
+
+@keyframes color-me-in {
+  /* You could think of as "step 1" */
+  0% {
+    text-shadow: 1px 1px 5px var(--background-color);
+  }
+    50% {
+    text-shadow: 1px 1px 15px var(--background-color);
+  }
+  100% {
+    text-shadow: 1px 1px 5px var(--background-color);
+  }
+}

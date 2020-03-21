@@ -1,0 +1,61 @@
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormControl} from "@angular/forms";
+import {BehaviorSubject, EMPTY, Observable, Subject} from "rxjs";
+import {ReposInterface} from "../repos.interface";
+import {debounceTime, distinctUntilChanged, switchMap} from "rxjs/operators";
+import {ApiService} from "../../api.service";
+
+@Component({
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.scss']
+})
+export class SearchComponent implements OnInit {
+  @Output() searchTriggered = new EventEmitter<boolean>();
+  input: FormControl;
+  filter$: Observable<string>;
+  gitHubData: Subject<ReposInterface[]> = new BehaviorSubject([]);
+  loading: Subject<boolean> = new BehaviorSubject(false);
+  constructor(private apiService: ApiService) {
+    this.input = new FormControl('');
+    this.filter$ = this.input.valueChanges;
+    //if input value changed and 500ms passed between the last type and the value is different than before this triggers
+    this.filter$.pipe(debounceTime(500), distinctUntilChanged(), switchMap(result => {
+      // in github username must have more than one character so to prevent api call I added this if
+      if (result.length > 1 ) {
+        this.loading.next(true);
+        return this.apiService.get(`https://api.github.com/users/${result}/repos?type=owner`, this.input.value)
+      } else {
+        //emits Observable that is empty and finished.
+        this.gitHubData.next([]);
+        this.searchTriggered.emit(false);
+        return EMPTY;
+      }
+    })).subscribe(result => {
+      //result of our repo search goes to filter function
+      this.applyFilter(result);
+    })
+  }
+  applyFilter(data) {
+    //remove forked projects.
+    let githubData = data.filter(res => res.fork !== true);
+    //check if no error
+    if (data[0] && !data[0].error) {
+      //add branches to repo.
+      githubData.forEach(obj => {
+        obj.branches = [];
+        this.apiService.get(`https://api.github.com/repos/${this.input.value}/${obj.name}/branches`).subscribe(result => {
+          obj.branches = result;
+        })
+      })
+    }
+    //emit new list to display
+    this.gitHubData.next(githubData);
+    this.searchTriggered.emit(true);
+    this.loading.next(false)
+  }
+
+  ngOnInit(): void {
+  }
+
+}

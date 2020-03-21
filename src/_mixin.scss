@@ -1,0 +1,14 @@
+
+@mixin font-style($sizeValue, $heightValue, $fontWeightValue) {
+  font-size: $sizeValue;
+  line-height: $heightValue;
+  font-weight: $fontWeightValue;
+}
+
+@mixin input($border-size, $border-radius, $input-height, $border-color, $padding) {
+  border: $border-size solid $border-color;
+  border-radius: $border-radius;
+  height: $input-height;
+  padding: 0 $padding;
+}
+

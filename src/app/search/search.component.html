@@ -1,0 +1,9 @@
+<div id="search">
+<div class="content">
+  <div class="input-container center">
+    <input type="text" [formControl]="input" placeholder="Type github username">
+  </div>
+  <app-content [data]="gitHubData"></app-content>
+<!--  <div *ngIf="loading | async">{{loading| async}}</div>-->
+</div>
+</div>

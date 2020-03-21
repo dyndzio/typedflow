@@ -1,0 +1,10 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div id="typedflow">
+  <div class="magic-container" [ngClass]="{'trigger-animation': animate}">
+    <h1>
+      Welcome to <span class="shine">{{ title }}</span>
+    </h1>
+    <app-search (searchTriggered)="stateChanged($event)"></app-search>
+  </div>
+</div>
+<router-outlet></router-outlet>

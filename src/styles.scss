@@ -1,0 +1,76 @@
+//normally i would keep all fonts in project since there is a risk of link to be compromised
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+@import "mixin";
+:root {
+  //responsive schema
+  --width: 100;
+  --height: 100;
+  --margin-base: 10;
+  --padding-base: 10;
+  --radius-base: 10;
+  //basic color schema
+  --text-color: #3E3E3E;
+  --plain-white: #fff;
+  --border-color: #FF0C67;
+  --detail-color: #00FFE6;
+  --neutral-color: #ff00a0;
+  --background-color: #FF00A0;
+  --background-gradient: linear-gradient(180deg, var(--border-color) 0%, var(--neutral-color) 100%);
+  //basic font schema
+  --font-size: 12px;
+  --font-weight: 400;
+  --font-weight-bold: 700;
+  --line-height: 14px;
+  font-family: 'Roboto', sans-serif;
+  background: rgba(255, 0, 160, 0.70) url('assets/background/cyberpunk-2077.jpg') no-repeat;
+  background-blend-mode: screen;
+  background-size: cover;
+  height: calc(var(--height) * 1%);
+}
+html {
+  h1 {
+    @include font-style(calc(var(--font-size) * 6), calc(var(--font-size) * 6), var(--font-weight));
+  }
+}
+body {
+  color: var(--plain-white);
+  textarea, select, input, button { outline: none; }
+  margin:0;
+  input {
+    @include input($border-size:1px, $border-radius:calc(var(--radius-base) * 4px), $input-height:calc(var(--height) * 0.68px), $border-color:var(--border-color), $padding: calc(var(--padding-base) * 3px));
+    @include font-style(calc(var(--font-size) * 1.8), calc(var(--height) * 0.68px), var(--font-weight));
+    width: calc(var(--width) * 1% - calc(var(--padding-base) * 6px));
+    color: var(--text-color);
+  }
+}
+
+
+@media (max-width: 480px) {
+
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+  .content {
+    width: calc(var(--width) * 0.6%);
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .input-container {
+    display: flex;
+    &.center {
+      justify-content: center;
+    }
+  }
+}
+
