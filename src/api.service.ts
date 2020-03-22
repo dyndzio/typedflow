@@ -19,7 +19,7 @@ export class ApiService {
   errorHandler(error, param) {
     let errorMessage = {};
     if (error.error) {
-      errorMessage = [{error: `No user with the name: ${param}`}]
+      errorMessage = [{error: `No user with the name: ${param} or api call limit has been reached`}]
     } else {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
