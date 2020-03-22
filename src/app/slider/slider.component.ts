@@ -2,7 +2,6 @@ import {
   Component,
   ElementRef,
   Input,
-  OnInit,
   Renderer2,
   ViewChild,
   OnChanges,
@@ -14,16 +13,13 @@ import {
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss']
 })
-export class SliderComponent implements OnInit, OnChanges {
+export class SliderComponent implements OnChanges {
   @ViewChild('slider', {static: false}) slider: ElementRef;
   @Input() data;
   @Input() height;
   maxHeight: number;
   currentHeight: number = 0;
   constructor(public render: Renderer2) {
-  }
-
-  ngOnInit(): void {
   }
 
   ngOnChanges(changes: SimpleChanges): void {

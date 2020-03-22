@@ -23,6 +23,7 @@
   --font-weight-bold: 700;
   --line-height: 14px;
   font-family: 'Roboto', sans-serif;
+  //background schema
   background: var(--background-gradient), url('assets/background/cyberpunk-2077.jpg') no-repeat;
   background-blend-mode: screen;
   background-size: cover;
@@ -41,7 +42,7 @@ body {
   margin:0;
   //global input style that can be override in specific component
   input {
-    @include input($border-size:1px, $border-radius:calc(var(--radius-base) * 4px), $input-height:calc(var(--height) * 0.68px), $border-color:var(--border-color), $padding: calc(var(--padding-base) * 3px));
+    @include input($border-size:calc(var(--base-size) * 0.1px), $border-radius:calc(var(--radius-base) * 4px), $input-height:calc(var(--height) * 0.68px), $border-color:var(--border-color), $padding: calc(var(--padding-base) * 3px));
     @include font-style(calc(var(--font-size) * 1.8), calc(var(--height) * 0.68px), var(--font-weight));
     width: calc(var(--width) * 1% - calc(var(--padding-base) * 6px));
     color: var(--text-color);

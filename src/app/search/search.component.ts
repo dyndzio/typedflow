@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {BehaviorSubject, EMPTY, Observable, Subject} from "rxjs";
 import {ReposInterface} from "../repos.interface";
@@ -34,7 +34,7 @@ import {animate, style, transition, trigger} from "@angular/animations";
     )
   ]
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent {
   input: FormControl;
   filter$: Observable<string>;
   gitHubData: Subject<ReposInterface[]> = new BehaviorSubject([]);
@@ -46,10 +46,11 @@ export class SearchComponent implements OnInit {
     this.filter$.pipe(debounceTime(500), distinctUntilChanged(), switchMap(result => {
       // in github username must have more than one character so to prevent api call I added this if
       if (result.length > 1 ) {
-        return this.apiService.get(`https://api.github.com/users/${result}/repos?type=owner`, this.input.value)
+        return this.apiService.get(`https://api.github.com/users/${result}/repos`, this.input.value)
       } else {
         //to hide last results
         this.gitHubData.next([]);
+        //trigger content is for :enter and :leave animation.
         this.triggerContent = false;
         //emits Observable that is empty and finished.
         return EMPTY;
@@ -78,9 +79,6 @@ export class SearchComponent implements OnInit {
     //emit new list to display
     this.gitHubData.next(githubData);
     this.triggerContent = true;
-  }
-
-  ngOnInit(): void {
   }
 
 }

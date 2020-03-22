@@ -3,6 +3,7 @@
     {{repositories[0].error}}
     </div>
   <ng-template #gitHubResult>
+    <div *ngIf="repositories.length > 0 else noRepos">
     <app-slider [data]="repositories" [height]="40">
       <div class="result" *ngFor="let repository of repositories">
         <div class="result-list">
@@ -22,7 +23,7 @@
               <div>{{repository.owner.login}}</div>
             </div>
           </div>
-          <ng-container *ngIf="repository.branches.length > 0">
+          <ng-container *ngIf="repository.branches.length > 0 else noBranches">
             <div class="result-list-container-label for-branch">BRANCHES</div>
             <div class="result-list-branches">
               <div class="result-list-container-label branch">BRANCH NAME</div>
@@ -33,8 +34,15 @@
               </ng-container>
           </div>
           </ng-container>
+          <ng-template #noBranches>
+            <div>This repository has no branches</div>
+          </ng-template>
         </div>
       </div>
     </app-slider>
+    </div>
+      <ng-template #noRepos>
+        <div class="error-container">This user do not have any Repositories</div>
+      </ng-template>
   </ng-template>
 </div>

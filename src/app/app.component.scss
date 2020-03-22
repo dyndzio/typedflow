@@ -1,4 +1,5 @@
 @import "../mixin";
+@import "../animations";
 #typedflow {
   display:flex;
   flex-direction: column;
@@ -13,7 +14,7 @@
       text-align: center;
       > span {
         &.shine {
-          animation: color-me-in 0.1s infinite;
+          animation: color-me-in 1s infinite;
           color: var(--detail-color);
           font-weight: var(--font-weight-bold);
         }
