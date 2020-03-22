@@ -1,7 +1,9 @@
 # Typedflow
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
-
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.7.
+## Installation of project
+To run this project node v12.11.1 should be installed. Also please make sure that angular cli is available as well.<br>
+To install dependencies please run: `npm install`
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
