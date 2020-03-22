@@ -7,12 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'TypedFlow';
-  animate: boolean;
   constructor() {}
-
-  stateChanged(event) {
-    console.log(event);
-    this.animate = event;
-  }
-
 }
