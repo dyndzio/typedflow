@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ReposInterface} from "../repos.interface";
 
 @Component({
   selector: 'app-content',
@@ -6,8 +7,8 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./content.component.scss']
 })
 export class ContentComponent implements OnInit {
-  @Input() data;
-  constructor() { }
+  @Input() data: ReposInterface[];
+  constructor() {}
 
   ngOnInit(): void {
   }

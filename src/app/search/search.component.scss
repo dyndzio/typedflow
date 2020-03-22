@@ -4,14 +4,14 @@
   .content {
     .input-container {
       margin: 0 calc(var(--margin-base) * 3px) calc(var(--margin-base) * 3px);
+      input {
+        text-align: center;
+      }
     }
     .result-list {
       display: flex;
       justify-content: space-evenly;
       padding: calc(var(--padding-base) * 2px) 0;
-      >div {
-        text-align: center;
-      }
     }
   }
 }

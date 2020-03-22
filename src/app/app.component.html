@@ -1,10 +1,13 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div id="typedflow">
-  <div class="magic-container" [ngClass]="{'trigger-animation': animate}">
+  <div class="magic-container">
     <h1>
       Welcome to <span class="shine">{{ title }}</span>
     </h1>
     <app-search (searchTriggered)="stateChanged($event)"></app-search>
   </div>
 </div>
-<router-outlet></router-outlet>
+<div id="project-info">
+  Zadanie rekrutacyjne dla TypedFlow Sp. z o.o. wykonane przez Daniela Wawrzyckiego<br>
+  Zdjęcie w tle własnością CD PROJEKT S.A. - nie może zostać wykorzystane w celach komercyjnych.
+</div>
+

@@ -4,11 +4,35 @@ import {BehaviorSubject, EMPTY, Observable, Subject} from "rxjs";
 import {ReposInterface} from "../repos.interface";
 import {debounceTime, distinctUntilChanged, switchMap} from "rxjs/operators";
 import {ApiService} from "../../api.service";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
+  animations: [
+    trigger(
+      'contentAnimation',
+      [
+        transition(
+          ':enter',
+          [
+            style({ opacity: 0, height: 0 }),
+            animate('0.4s ease-out',
+              style({ opacity: 1, height: 40 + 'vh' }))
+          ]
+        ),
+        transition(
+          ':leave',
+          [
+            style({ opacity: 1, height: 40 + 'vh' }),
+            animate('0.4s ease-in',
+              style({ opacity: 0, height: 0 }))
+          ]
+        )
+      ]
+    )
+  ]
 })
 export class SearchComponent implements OnInit {
   @Output() searchTriggered = new EventEmitter<boolean>();
@@ -16,6 +40,7 @@ export class SearchComponent implements OnInit {
   filter$: Observable<string>;
   gitHubData: Subject<ReposInterface[]> = new BehaviorSubject([]);
   loading: Subject<boolean> = new BehaviorSubject(false);
+  triggerContent: boolean = false;
   constructor(private apiService: ApiService) {
     this.input = new FormControl('');
     this.filter$ = this.input.valueChanges;
@@ -26,9 +51,10 @@ export class SearchComponent implements OnInit {
         this.loading.next(true);
         return this.apiService.get(`https://api.github.com/users/${result}/repos?type=owner`, this.input.value)
       } else {
-        //emits Observable that is empty and finished.
+        //to hide last results
         this.gitHubData.next([]);
-        this.searchTriggered.emit(false);
+        this.triggerContent = false;
+        //emits Observable that is empty and finished.
         return EMPTY;
       }
     })).subscribe(result => {
@@ -45,13 +71,17 @@ export class SearchComponent implements OnInit {
       githubData.forEach(obj => {
         obj.branches = [];
         this.apiService.get(`https://api.github.com/repos/${this.input.value}/${obj.name}/branches`).subscribe(result => {
-          obj.branches = result;
+          // if user got branches
+          if (result[0]) {
+            obj.branches = result;
+          }
         })
       })
     }
     //emit new list to display
     this.gitHubData.next(githubData);
     this.searchTriggered.emit(true);
+    this.triggerContent = true;
     this.loading.next(false)
   }
 

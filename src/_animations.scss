@@ -1,0 +1,12 @@
+//normally i would make a animation mixin but in this case there is only one animation used.
+@keyframes color-me-in {
+  0% {
+    text-shadow: 1px 1px 5px var(--background-color);
+  }
+  50% {
+    text-shadow: 1px 1px 15px var(--background-color);
+  }
+  100% {
+    text-shadow: 1px 1px 5px var(--background-color);
+  }
+}

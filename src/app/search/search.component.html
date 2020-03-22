@@ -3,7 +3,8 @@
   <div class="input-container center">
     <input type="text" [formControl]="input" placeholder="Type github username">
   </div>
-  <app-content [data]="gitHubData"></app-content>
-<!--  <div *ngIf="loading | async">{{loading| async}}</div>-->
+  <div *ngIf="triggerContent" @contentAnimation>
+    <app-content @contentAnimation [data]="gitHubData | async"></app-content>
+  </div>
 </div>
 </div>

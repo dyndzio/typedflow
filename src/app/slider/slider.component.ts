@@ -32,8 +32,10 @@ export class SliderComponent implements OnInit, OnChanges {
       //first item is already visible so we take 1 out of data length;
       this.maxHeight = (this.data.length - 1) * this.height;
       //add style to slider
-      this.render.setStyle(this.slider.nativeElement, 'transform', `translate3d(0px, ${this.currentHeight}vh, 0px)`);
-      this.render.setStyle(this.slider.nativeElement, 'transition', 'all 0.25s ease 0s');
+      setTimeout(() => {
+        this.render.setStyle(this.slider.nativeElement, 'transform', `translate3d(0px, ${this.currentHeight}vh, 0px)`);
+        this.render.setStyle(this.slider.nativeElement, 'transition', 'all 0.25s ease 0s');
+      }, 1000);
     }
   }
 

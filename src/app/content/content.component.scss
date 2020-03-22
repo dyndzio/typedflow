@@ -4,6 +4,14 @@
   padding: 0 calc(var(--padding-base) * 3px);
   overflow: hidden;
   position: relative;
+  .error-container {
+    height: calc(var(--height) * 0.4vh);
+    text-align: center;
+    @include font-style(calc(var(--font-size) * 2.8), calc(var(--font-size) * 2.8), var(--font-weight-bold));
+    color: var(--plain-white);
+    background: url('../../assets/icon/ninja.png') no-repeat center;
+    background-size: calc(var(--base-size) * 2.5%);
+  }
   .result-list {
     justify-content: space-between;
     display: grid;
@@ -42,7 +50,7 @@
     &-branches {
       color: var(--text-color);
       grid-area: 3 / 1 / 4 / 3;
-      @include input($border-size:1px, $border-radius:calc(var(--radius-base) * 4px), $input-height:calc(var(--height) * 1%), $border-color:var(--border-color), $padding: calc(var(--padding-base) * 3px));
+      @include input($border-size:1px, $border-radius:0, $input-height:calc(var(--height) * 1%), $border-color:var(--border-color), $padding: calc(var(--padding-base) * 3px));
       background: rgba(255, 255, 255, 0.7);
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -50,7 +58,7 @@
       grid-column-gap: calc(var(--margin-base) * 1px);
       grid-row-gap: calc(var(--margin-base) * 1px);
       text-align: center;
-      overflow:hidden;
+      overflow-y: scroll;
       .typo {
         @include font-style(calc(var(--font-size) * 1.2), calc(var(--height) * 0.68px), var(--font-weight));
       }

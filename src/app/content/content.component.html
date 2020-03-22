@@ -1,7 +1,7 @@
-<div id="content-displayer" *ngIf="data | async as repositories">
-    <span *ngIf="repositories[0] && repositories[0].error else gitHubResult">
+<div id="content-displayer" *ngIf="data as repositories">
+    <div class="error-container" *ngIf="repositories[0] && repositories[0].error else gitHubResult">
     {{repositories[0].error}}
-    </span>
+    </div>
   <ng-template #gitHubResult>
     <app-slider [data]="repositories" [height]="40">
       <div class="result" *ngFor="let repository of repositories">
@@ -22,15 +22,17 @@
               <div>{{repository.owner.login}}</div>
             </div>
           </div>
+          <ng-container *ngIf="repository.branches.length > 0">
             <div class="result-list-container-label for-branch">BRANCHES</div>
             <div class="result-list-branches">
               <div class="result-list-container-label branch">BRANCH NAME</div>
               <div class="result-list-container-label branch">COMMIT SHA</div>
               <ng-container *ngFor="let branch of repository.branches">
                 <div class="typo"> {{branch.name}}</div>
-                <div class="typo">{{branch.commit.sha}}</div>
+                <div *ngIf="branch.commit" class="typo">{{branch.commit.sha}}</div>
               </ng-container>
           </div>
+          </ng-container>
         </div>
       </div>
     </app-slider>

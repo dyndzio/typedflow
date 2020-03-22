@@ -7,6 +7,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { SearchComponent } from './search/search.component';
 import { ContentComponent } from './content/content.component';
 import { SliderComponent } from './slider/slider.component';
+import { BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SliderComponent } from './slider/slider.component';
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
